@@ -9,9 +9,12 @@ package com.customer.classattendance.domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,7 +30,9 @@ public class Department implements Serializable {
     private String ContactDetails;
     
     //foreign Key
-    //private List<Faculty> faculty;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Faculty faculty;
     
     
     private Department()
@@ -39,7 +44,7 @@ public class Department implements Serializable {
         this.id             = aThis.id;
         this.name           = aThis.name;
         this.ContactDetails = aThis.ContactDetails;
-        //this.faculty        = aThis.faculty;
+        this.faculty        = aThis.faculty;
         
     }
     public static class Builder
@@ -47,8 +52,9 @@ public class Department implements Serializable {
         private Long id;
         private String name;
         private String ContactDetails;
+        
         //foreign Key
-        //private List<Faculty> faculty;
+        private Faculty faculty;
         
         public Builder()
         {
@@ -70,19 +76,19 @@ public class Department implements Serializable {
             this.ContactDetails = value;
             return this;
         }
-        /*
-        private Builder faculty(List<Faculty> value)
+        
+        public Builder faculty(Faculty value)
         {
             this.faculty = value;
             return this;
         }
-        */
+        
         public Builder department(Department value)
         {
             this.id             = value.getId();
             this.name           = value.getName();
             this.ContactDetails = value.getContactDetails();
-           // this.faculty        = value.getFaculty();
+            this.faculty        = value.getFaculty();
             return this;
         }
         public Department build()
@@ -95,11 +101,6 @@ public class Department implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
-/*
-    public List<Faculty> getFaculty() {
-        return faculty;
-    }
-  */  
 
     public String getName() {
         return name;
@@ -107,6 +108,10 @@ public class Department implements Serializable {
 
     public String getContactDetails() {
         return ContactDetails;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
     }
    
 

@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package com.test.com.paballo.classattendance.test.repository;
+package com.test.com.customer.classattendance.test.repository;
 
 import com.customer.classattendance.domain.ClassLecture;
 import com.customer.classattendance.repository.ClassLectureRepository;
-import com.test.com.paballo.classattendance.test.ConnectionConfigTest;
+import com.test.com.customer.classattendance.test.ConnectionConfigTest;
 import java.util.*;
 //import org.apache.derby.client.am.DateTime;
 import java.util.Calendar;

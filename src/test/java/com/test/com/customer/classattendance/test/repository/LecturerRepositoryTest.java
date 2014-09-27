@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package com.test.com.paballo.classattendance.test.repository;
+package com.test.com.customer.classattendance.test.repository;
 
 import com.customer.classattendance.domain.Lecturer;
 import com.customer.classattendance.repository.LecturerRepository;
-import com.test.com.paballo.classattendance.test.ConnectionConfigTest;
+import com.test.com.customer.classattendance.test.ConnectionConfigTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.test.com.paballo.classattendance.test;
+package com.test.com.customer.classattendance.test;
 
 import com.customer.classattendance.Application;
 import javax.sql.DataSource;
@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan(basePackageClasses = Application.class, excludeFilters = @ComponentScan.Filter({Controller.class, Configuration.class}))
 
-@EnableJpaRepositories(basePackages = "com.paballo.classattendance.repository")
+@EnableJpaRepositories(basePackages = "com.customer.classattendance.repository")
 public class ConnectionConfigTest {
 
     @Bean
@@ -49,7 +49,7 @@ public class ConnectionConfigTest {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
         lef.setDataSource(dataSource);
         lef.setJpaVendorAdapter(jpaVendorAdapter);
-        lef.setPackagesToScan("com.paballo.classattendance.domain");
+        lef.setPackagesToScan("com.customer.classattendance.domain");
         return lef;
     }
 

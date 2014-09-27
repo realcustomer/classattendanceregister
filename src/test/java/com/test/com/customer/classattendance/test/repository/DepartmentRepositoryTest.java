@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 
-package com.test.com.paballo.classattendance.test.repository;
+package com.test.com.customer.classattendance.test.repository;
 
-import com.customer.classattendance.domain.Course;
-import com.customer.classattendance.repository.CourseRepository;
-import com.test.com.paballo.classattendance.test.ConnectionConfigTest;
+import com.customer.classattendance.domain.Department;
+import com.customer.classattendance.domain.Faculty;
+import com.customer.classattendance.repository.DepartmentRepository;
+import com.test.com.customer.classattendance.test.ConnectionConfigTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -23,44 +24,45 @@ import org.testng.annotations.Test;
  *
  * @author donkey
  */
-public class CourseRepositoryTest {
+public class DepartmentRepositoryTest {
      public static ApplicationContext ctx;
+     private DepartmentRepository repo;
      private Long id;
-     private CourseRepository repo;
+     private Department dp;
+     private Faculty fac;
      
-     private Course c;
     
-    public CourseRepositoryTest() {
+    public DepartmentRepositoryTest() {
     }
-
-
-    @Test
+@Test
     public void create() {
-    repo = ctx.getBean(CourseRepository.class);
+        
+        fac = new Faculty.Builder()
+                   .name("Informatics")
+                   .build();
+    repo = ctx.getBean(DepartmentRepository.class);
     
-    Course c    = new Course.Builder()
-                     .name("IT")
-                     .term("2014")
-                     .type("BA")
-                     .build();
-    repo.save(c);
-    id = c.getId();
-    Assert.assertNotNull(c);
-    
+    dp = new Department.Builder()
+                       .name("iNFO")
+                       .faculty(fac)
+                       .contactDetails("911")
+                       .build();
+    repo.save(dp);
+    id = dp.getId();
+    Assert.assertNotNull(dp);
     
     }
     @Test
     public void read() {
-     repo = ctx.getBean(CourseRepository.class);   
-    
+    repo = ctx.getBean(DepartmentRepository.class);
     }
     @Test
     public void update() {
-    repo = ctx.getBean(CourseRepository.class);
+    repo = ctx.getBean(DepartmentRepository.class);
     }
     @Test
     public void delete() {
-    repo = ctx.getBean(CourseRepository.class);
+    repo = ctx.getBean(DepartmentRepository.class);
     }
 
     @BeforeClass
