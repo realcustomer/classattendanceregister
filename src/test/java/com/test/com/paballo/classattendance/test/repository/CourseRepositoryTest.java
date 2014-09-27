@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package com.test.com.customer.classattendance.test.repository;
+package com.test.com.paballo.classattendance.test.repository;
 
-import com.customer.classattendance.domain.Department;
-import com.customer.classattendance.repository.DepartmentRepository;
-import com.test.com.customer.classattendance.test.ConnectionConfigTest;
+import com.customer.classattendance.domain.Course;
+import com.customer.classattendance.repository.CourseRepository;
+import com.test.com.paballo.classattendance.test.ConnectionConfigTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -23,39 +23,44 @@ import org.testng.annotations.Test;
  *
  * @author donkey
  */
-public class DepartmentRepositoryTest {
+public class CourseRepositoryTest {
      public static ApplicationContext ctx;
-     private DepartmentRepository repo;
      private Long id;
-     private Department dp;
+     private CourseRepository repo;
      
+     private Course c;
     
-    public DepartmentRepositoryTest() {
+    public CourseRepositoryTest() {
     }
-@Test
+
+
+    @Test
     public void create() {
-    repo = ctx.getBean(DepartmentRepository.class);
+    repo = ctx.getBean(CourseRepository.class);
     
-    dp = new Department.Builder()
-                       .name("iNFO")
-                       .contactDetails("911")
-                       .build();
-    repo.save(dp);
-    id = dp.getId();
-    Assert.assertNotNull(dp);
+    Course c    = new Course.Builder()
+                     .name("IT")
+                     .term("2014")
+                     .type("BA")
+                     .build();
+    repo.save(c);
+    id = c.getId();
+    Assert.assertNotNull(c);
+    
     
     }
     @Test
     public void read() {
-    repo = ctx.getBean(DepartmentRepository.class);
+     repo = ctx.getBean(CourseRepository.class);   
+    
     }
     @Test
     public void update() {
-    repo = ctx.getBean(DepartmentRepository.class);
+    repo = ctx.getBean(CourseRepository.class);
     }
     @Test
     public void delete() {
-    repo = ctx.getBean(DepartmentRepository.class);
+    repo = ctx.getBean(CourseRepository.class);
     }
 
     @BeforeClass

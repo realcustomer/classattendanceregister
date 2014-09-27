@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.test.com.customer.classattendance.test;
+package com.test.com.paballo.classattendance.test;
 
 import com.customer.classattendance.Application;
 import javax.sql.DataSource;

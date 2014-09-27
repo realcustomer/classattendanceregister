@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package com.test.com.customer.classattendance.test.repository;
+package com.test.com.paballo.classattendance.test.repository;
 
-import com.customer.classattendance.domain.Students;
-import com.customer.classattendance.repository.StudentsRepository;
-import com.test.com.customer.classattendance.test.ConnectionConfigTest;
+import com.customer.classattendance.domain.Department;
+import com.customer.classattendance.repository.DepartmentRepository;
+import com.test.com.paballo.classattendance.test.ConnectionConfigTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -23,39 +23,39 @@ import org.testng.annotations.Test;
  *
  * @author donkey
  */
-public class StudentsRepositoryTest {
+public class DepartmentRepositoryTest {
      public static ApplicationContext ctx;
-     private StudentsRepository repo;
-     private Students stud;
-     private String   studNumber;
+     private DepartmentRepository repo;
+     private Long id;
+     private Department dp;
      
-     
-    public StudentsRepositoryTest() {
+    
+    public DepartmentRepositoryTest() {
     }
-
-    @Test
+@Test
     public void create() {
-    repo = ctx.getBean(StudentsRepository.class);
-    stud = new Students.Builder()
-                       .studendNumber("2143685")
-                       .name("Apple")
-                       .surname("Mac")
+    repo = ctx.getBean(DepartmentRepository.class);
+    
+    dp = new Department.Builder()
+                       .name("iNFO")
+                       .contactDetails("911")
                        .build();
-    repo.save(stud);
-    Assert.assertNotNull(stud);
+    repo.save(dp);
+    id = dp.getId();
+    Assert.assertNotNull(dp);
     
     }
     @Test
     public void read() {
-    repo = ctx.getBean(StudentsRepository.class);
+    repo = ctx.getBean(DepartmentRepository.class);
     }
     @Test
     public void update() {
-    repo = ctx.getBean(StudentsRepository.class);
+    repo = ctx.getBean(DepartmentRepository.class);
     }
     @Test
     public void delete() {
-    repo = ctx.getBean(StudentsRepository.class);
+    repo = ctx.getBean(DepartmentRepository.class);
     }
 
     @BeforeClass

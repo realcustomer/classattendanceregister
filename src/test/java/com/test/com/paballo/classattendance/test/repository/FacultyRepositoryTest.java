@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package com.test.com.customer.classattendance.test.repository;
+package com.test.com.paballo.classattendance.test.repository;
 
-import com.customer.classattendance.domain.Subjects;
-import com.customer.classattendance.repository.SubjectsRepository;
-import com.test.com.customer.classattendance.test.ConnectionConfigTest;
+import com.customer.classattendance.domain.Faculty;
+import com.customer.classattendance.repository.FacultyRepository;
+import com.test.com.paballo.classattendance.test.ConnectionConfigTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -23,38 +23,42 @@ import org.testng.annotations.Test;
  *
  * @author donkey
  */
-public class SubjectsRepositoryTest {
+public class FacultyRepositoryTest {
      public static ApplicationContext ctx;
-     private SubjectsRepository repo;
-     private Subjects sub;
-     private String   subjectCode;
-    
-    public SubjectsRepositoryTest() {
+     private FacultyRepository repo;
+     private Long id;
+     
+     Faculty f;
+     
+     
+    public FacultyRepositoryTest() {
     }
 
     @Test
     public void create() {
-    repo = ctx.getBean(SubjectsRepository.class);
-    sub = new Subjects.Builder()
-                      .subjectId("DOS100")
-                      .name("DevelopmentSoftware")
-                      .co_ordinator("Piyose")
-                      .build();
-    repo.save(sub);
-    Assert.assertNotNull(sub);
+    repo = ctx.getBean(FacultyRepository.class);
+    
+    f = new Faculty.Builder()
+                   .name("Informatics")
+                   .build();
+    
+    repo.save(f);
+    id = f.getId();
+    Assert.assertNotNull(f);
+    
     
     }
     @Test
     public void read() {
-    repo = ctx.getBean(SubjectsRepository.class);
+    repo = ctx.getBean(FacultyRepository.class);
     }
     @Test
     public void update() {
-    repo = ctx.getBean(SubjectsRepository.class);
+    repo = ctx.getBean(FacultyRepository.class);
     }
     @Test
     public void delete() {
-    repo = ctx.getBean(SubjectsRepository.class);
+    repo = ctx.getBean(FacultyRepository.class);
     }
 
     @BeforeClass

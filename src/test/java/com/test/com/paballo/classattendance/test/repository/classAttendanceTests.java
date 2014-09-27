@@ -1,4 +1,4 @@
-package com.test.com.customer.classattendance.test.repository;
+package com.test.com.paballo.classattendance.test.repository;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
