@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,16 +28,15 @@ public class Subjects implements Serializable {
     @Id
     private String subjectId;
     private String name;
-    private String co_ordinator;
+    
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id")
     private Course course;
-
+    
     private Subjects(Builder aThis) {
         subjectId    = aThis.subjectId;
         name         = aThis.name;
-        co_ordinator = aThis.co_ordinator;
         course       = aThis.course;
     }
     
@@ -45,7 +45,6 @@ public class Subjects implements Serializable {
     {
         private String subjectId;
         private String name;
-        private String co_ordinator;
     
         private Course course;
         
@@ -64,11 +63,6 @@ public class Subjects implements Serializable {
             name = value;
             return this;
         }
-        public  Builder co_ordinator(String value)
-        {
-            co_ordinator = value;
-            return this;
-        }
         
         public  Builder course(Course value)
         {
@@ -80,7 +74,6 @@ public class Subjects implements Serializable {
         {
             subjectId       = value.getSubjectId();
             name            = value.getName();
-            co_ordinator    = value.getCo_ordinator();
             course          = value.getCourse();
             return this;
         }
@@ -101,10 +94,6 @@ public class Subjects implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public String getCo_ordinator() {
-        return co_ordinator;
     }
     
     public Course getCourse() {

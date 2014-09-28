@@ -9,10 +9,14 @@ package com.customer.classattendance.domain;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 //import org.apache.derby.client.am.DateTime;
 //import org.apache.derby.client.am.DateTime;
@@ -32,7 +36,7 @@ public class ClassLecture implements Serializable {
     
     private DateTime dates;
     private DateTime startTime;
-    private DateTime endTime;
+    private DateTime endTime;    
     
     private ClassLecture()
     {

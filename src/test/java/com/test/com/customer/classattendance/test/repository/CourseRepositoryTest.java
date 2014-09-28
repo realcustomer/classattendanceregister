@@ -36,28 +36,32 @@ public class CourseRepositoryTest {
     public CourseRepositoryTest() {
     }
 
+    public void first()
+    {
+        fac = new Faculty.Builder()
+                .name("Informatics")
+                .build();
+
+        dp = new Department.Builder()
+                    .name("iNFO")
+                    .faculty(fac)
+                    .contactDetails("911")
+                    .build();
+    }
 
     @Test
     public void create() {
     repo = ctx.getBean(CourseRepository.class);
-          fac = new Faculty.Builder()
-                   .name("Informatics")
-                   .build();
-          
-    dp = new Department.Builder()
-                       .name("iNFO")
-                       .faculty(fac)
-                       .contactDetails("911")
-                       .build();
-    
-    Course c    = new Course.Builder()
-                     .name("IT")
-                     .department(dp)
-                     .type("BA")
-                     .build();
-    repo.save(c);
-    id = c.getId();
-    Assert.assertNotNull(c);
+
+        first();
+        Course c    = new Course.Builder()
+                         .name("IT")
+                         .department(dp)
+                         .type("BA")
+                         .build();
+        repo.save(c);
+        id = c.getId();
+        Assert.assertNotNull(c);
     
     
     }

@@ -6,6 +6,9 @@
 
 package com.test.com.customer.classattendance.test.repository;
 
+import com.customer.classattendance.domain.Course;
+import com.customer.classattendance.domain.Department;
+import com.customer.classattendance.domain.Faculty;
 import com.customer.classattendance.domain.Subjects;
 import com.customer.classattendance.repository.SubjectsRepository;
 import com.test.com.customer.classattendance.test.ConnectionConfigTest;
@@ -27,33 +30,52 @@ public class SubjectsRepositoryTest {
      public static ApplicationContext ctx;
      private SubjectsRepository repo;
      private Subjects sub;
-     private String   subjectCode;
-    
+     
+     private Course c;
+     private Department dp;
+     private Faculty fac;
     public SubjectsRepositoryTest() {
     }
+    public void first()
+    {
+        fac = new Faculty.Builder()
+                .name("Informatics")
+                .build();
 
+        dp = new Department.Builder()
+                    .name("iNFO")
+                    .faculty(fac)
+                    .contactDetails("911")
+                    .build();
+        c    = new Course.Builder()
+                         .name("IT")
+                         .department(dp)
+                         .type("BA")
+                         .build();
+    }
     @Test
-    public void create() {
-    repo = ctx.getBean(SubjectsRepository.class);
-    sub = new Subjects.Builder()
-                      .subjectId("DOS100")
-                      .name("DevelopmentSoftware")
-                      .co_ordinator("Piyose")
-                      .build();
-    repo.save(sub);
-    Assert.assertNotNull(sub);
+    public void createSubjects() {
+        first();
+        repo = ctx.getBean(SubjectsRepository.class);
+        sub = new Subjects.Builder()
+                          .subjectId("DOS100")
+                          .name("DevelopmentSoftware")
+                          .course(c)
+                          .build();
+        repo.save(sub);
+        Assert.assertNotNull(sub);
     
     }
-    @Test
-    public void read() {
+    //@Test
+    public void readSubjects() {
     repo = ctx.getBean(SubjectsRepository.class);
     }
-    @Test
-    public void update() {
+    //@Test
+    public void updateSubjects() {
     repo = ctx.getBean(SubjectsRepository.class);
     }
-    @Test
-    public void delete() {
+    //@Test
+    public void deleteSubjects() {
     repo = ctx.getBean(SubjectsRepository.class);
     }
 

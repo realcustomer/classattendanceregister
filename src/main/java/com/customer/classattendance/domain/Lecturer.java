@@ -9,9 +9,13 @@ package com.customer.classattendance.domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -28,8 +32,10 @@ public class Lecturer implements Serializable {
     private String  telephone;
     private String  email;
     
-    //foreign Key
-    //private List<ClassLecture> classLucture;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "lecturer_id")
+    private List<Subjects> subjects;
+    
     
     
     
@@ -45,7 +51,7 @@ public class Lecturer implements Serializable {
         this.office       =   aThis.office;
         this.telephone    =   aThis.telephone;
         this.email        =   aThis.email;
-        //this.classLucture =   aThis.classLucture;
+        this.subjects =   aThis.subjects;
         
     }
     
@@ -56,7 +62,7 @@ public class Lecturer implements Serializable {
          private String  office;
          private String  telephone;
          private String  email;
-         //private List<ClassLecture> classLucture;
+         private List<Subjects> subjects;
          
          public Builder()
          {
@@ -88,13 +94,12 @@ public class Lecturer implements Serializable {
              this.email = value;
              return this;
          }
-         /*
-         public Builder classLecture(List<ClassLecture> value)
+         
+         public Builder subjects(List<Subjects> value)
          {
-             this.classLucture = value;
+             this.subjects = value;
              return this;
          }
-         */
          
          public Builder lecture(Lecturer value)
          {
@@ -103,7 +108,7 @@ public class Lecturer implements Serializable {
              this.office        =   value.getOffice();
              this.telephone     =   value.getTelephone();
              this.email         =   value.getEmail();
-             //this.classLucture  =   value.getClassLucture();
+             this.subjects  =   value.getSubjects();
              return this;
          }
          public Lecturer build()
@@ -113,11 +118,9 @@ public class Lecturer implements Serializable {
          
          
     }
-/*
-    public List<ClassLecture> getClassLucture() {
-        return classLucture;
+    public List<Subjects> getSubjects() {
+        return subjects;
     }
-  */  
     
     
     public static long getSerialVersionUID() {
