@@ -34,7 +34,8 @@ public class Students implements Serializable {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "studentNumber")
     private List<Subjects> subjects;
-        
+       
+    
     private Students()
     {
         

@@ -16,7 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 //import org.apache.derby.client.am.DateTime;
 //import org.apache.derby.client.am.DateTime;
@@ -26,9 +28,11 @@ import org.joda.time.DateTime;
 /**
  *
  * @author donkey
+ * 
+ * I
  */
 @Entity
-public class ClassLecture implements Serializable {
+public class ClassLecture implements Serializable { //??????????????????????????????????
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,6 +41,19 @@ public class ClassLecture implements Serializable {
     private DateTime dates;
     private DateTime startTime;
     private DateTime endTime;    
+    
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "class_id")
+    private Subjects subjects;
+    
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "class_id")
+    private List<Students> students;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "class_id")
+    private Lecturer lecturer;
     
     private ClassLecture()
     {
@@ -47,6 +64,9 @@ public class ClassLecture implements Serializable {
         id          =   aThis.id;
         startTime   =   aThis.startTime;
         endTime     =   aThis.endTime;
+        students = aThis.students;
+        lecturer = aThis.lecturer;
+        subjects = aThis.subjects;
     }
     
     public static class Builder
@@ -55,6 +75,10 @@ public class ClassLecture implements Serializable {
         private DateTime startTime;
         private DateTime endTime;
         
+        private Lecturer lecturer;
+        private List<Students> students;
+        private Subjects subjects;
+        
         public Builder()
         {
             
@@ -62,6 +86,21 @@ public class ClassLecture implements Serializable {
         public Builder id(Long value)
         {
             id = value;
+            return this;
+        }
+        public Builder subjects(Subjects s)
+        {
+            subjects = s;
+            return this;
+        }
+        public Builder lecturer(Lecturer s)
+        {
+            lecturer = s;
+            return this;
+        }
+        public Builder students(List<Students> s)
+        {
+            students = s;
             return this;
         }
         public Builder startTime(DateTime value)
@@ -79,6 +118,9 @@ public class ClassLecture implements Serializable {
             id          =   value.getId();
             startTime   =   value.getStartTime();
             endTime     =   value.getEndTime();
+            students = value.getStudents();
+            lecturer = value.getLecturer();
+            subjects = value.getSubjects();
             return this;
         }
         public ClassLecture build()
@@ -102,7 +144,19 @@ public class ClassLecture implements Serializable {
     public DateTime getEndTime() {
         return endTime;
     }
-    
+
+    public Subjects getSubjects() {
+        return subjects;
+    }
+
+    public List<Students> getStudents() {
+        return students;
+    }
+
+    public Lecturer getLecturer() {
+        return lecturer;
+    }
+
    
     @Override
     public int hashCode() {
