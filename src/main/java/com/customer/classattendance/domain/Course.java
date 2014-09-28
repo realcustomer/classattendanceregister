@@ -9,9 +9,12 @@ package com.customer.classattendance.domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -25,10 +28,11 @@ public class Course implements Serializable {
     private Long id;
     private String name;
     private String type;
-    private String term;
     
     //foreign key gave erros
-    //private List<Department> department;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "course_id")
+    private Department department;
 
     private Course()
     {
@@ -38,9 +42,8 @@ public class Course implements Serializable {
     private Course(Builder aThis) {
         this.id         =   aThis.id;
         this.name       =   aThis.name;
-        this.term       =   aThis.term;
         this.type       =   aThis.type;
-        //this.department =   aThis.department;
+        this.department =   aThis.department;
     }
     
     public static class Builder
@@ -48,8 +51,7 @@ public class Course implements Serializable {
                 private Long id;
                 private String name;
                 private String type;
-                private String term;
-                //private List<Department> department;
+                private Department department;
                 
                 public Builder id(Long value)
                 {
@@ -66,25 +68,18 @@ public class Course implements Serializable {
                    type = value;
                            return this;
                 }
-                public Builder term(String value)
-                {
-                   term = value;
-                           return this;
-                }
-                /*
-                public Builder department(List<Department> value)
+                
+                public Builder department(Department value)
                 {
                     department = value;
                     return this;
                 }
-                */
                 public Builder course(Course value)
                 {
                     this.id         =  value.getId();
                     this.name       =  value.getName();
                     this.type       =  value.getType();
-                    this.term       =  value.getTerm();
-                   // this.department =  value.getDepartment();
+                   this.department =  value.getDepartment();
                     
                     return this;
                 }
@@ -111,14 +106,9 @@ public class Course implements Serializable {
         return type;
     }
 
-    public String getTerm() {
-        return term;
-    }
-/*
-    public List<Department> getDepartment() {
+    public Department getDepartment() {
         return department;
     }
-*/
     
 
     @Override

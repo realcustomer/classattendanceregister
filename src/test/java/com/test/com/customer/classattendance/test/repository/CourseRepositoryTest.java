@@ -7,6 +7,8 @@
 package com.test.com.customer.classattendance.test.repository;
 
 import com.customer.classattendance.domain.Course;
+import com.customer.classattendance.domain.Department;
+import com.customer.classattendance.domain.Faculty;
 import com.customer.classattendance.repository.CourseRepository;
 import com.test.com.customer.classattendance.test.ConnectionConfigTest;
 import org.springframework.context.ApplicationContext;
@@ -29,7 +31,8 @@ public class CourseRepositoryTest {
      private CourseRepository repo;
      
      private Course c;
-    
+     private Department dp;
+     private Faculty fac;
     public CourseRepositoryTest() {
     }
 
@@ -37,10 +40,19 @@ public class CourseRepositoryTest {
     @Test
     public void create() {
     repo = ctx.getBean(CourseRepository.class);
+          fac = new Faculty.Builder()
+                   .name("Informatics")
+                   .build();
+          
+    dp = new Department.Builder()
+                       .name("iNFO")
+                       .faculty(fac)
+                       .contactDetails("911")
+                       .build();
     
     Course c    = new Course.Builder()
                      .name("IT")
-                     .term("2014")
+                     .department(dp)
                      .type("BA")
                      .build();
     repo.save(c);

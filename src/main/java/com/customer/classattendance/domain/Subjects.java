@@ -9,9 +9,12 @@ package com.customer.classattendance.domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -26,13 +29,15 @@ public class Subjects implements Serializable {
     private String name;
     private String co_ordinator;
     
-    //private List<Course> course;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "subject_id")
+    private Course course;
 
     private Subjects(Builder aThis) {
         subjectId    = aThis.subjectId;
         name         = aThis.name;
         co_ordinator = aThis.co_ordinator;
-        //course       = aThis.course;
+        course       = aThis.course;
     }
     
     
@@ -42,7 +47,7 @@ public class Subjects implements Serializable {
         private String name;
         private String co_ordinator;
     
-        //private List<Course> course;
+        private Course course;
         
         public  Builder()
         {
@@ -64,19 +69,19 @@ public class Subjects implements Serializable {
             co_ordinator = value;
             return this;
         }
-        /*
-        public  Builder course(List<Course> value)
+        
+        public  Builder course(Course value)
         {
             course = value;
             return this;
         }
-        */
+        
         public Builder Subjects(Subjects value)
         {
             subjectId       = value.getSubjectId();
             name            = value.getName();
             co_ordinator    = value.getCo_ordinator();
-          //  course          = value.getCourse();
+            course          = value.getCourse();
             return this;
         }
         public Subjects build()
@@ -101,13 +106,8 @@ public class Subjects implements Serializable {
     public String getCo_ordinator() {
         return co_ordinator;
     }
-/*
-    public List<Course> getCourse() {
+    
+    public Course getCourse() {
         return course;
     }
-    */
-    
-
-   
-    
 }
